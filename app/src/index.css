@@ -18,3 +18,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
 }
+
+p, a, input {
+  color: white;
+}
+
+#Sidebar .items .item svg {
+  display: inline-block;
+  height: 1.25rem;
+  width: 1.25rem;
+  color: rgba(107, 114, 128, 1);
+}
+
+#Sidebar .items .item:hover svg,
+#Sidebar .items .item:hover p {
+  color: rgba(229, 231, 235, 1);
+  transition-timing-function: linear;
+  transition-duration: 200ms;
+}
