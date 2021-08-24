@@ -1,4 +1,4 @@
-import { ChevronRightIcon, FilmIcon, HomeIcon } from '@heroicons/react/outline'
+import { ChevronRightIcon, HomeIcon } from '@heroicons/react/outline'
 
 const Menu = [
   { name: 'Home', href: '#', current: true, icon: <HomeIcon /> },
@@ -19,7 +19,7 @@ const MenuGroup = ({ title = '', items = [] }) => {
       <p className="pr-6 uppercase text-sm text-gray-400 font-semibold mb-2">{title}</p>
       <ul>
         {items.map((item, index) => (
-          <a key={index} href={item.href} className="block space-x-3 space-y-5 pl-2 item hover:border-red-400 border-gray-900 border-r-2 ease-linear duration-200">
+          <a key={index} href={item.href} className="block space-x-3 space-y-5 pl-2 item hover:border-red-600 border-gray-900 border-r-2 ease-linear duration-200">
             {item.icon ? item.icon : <ChevronRightIcon />}
             <p className="inline-block text-sm font-medium text-gray-400">{item.name}</p>
           </a>
@@ -32,11 +32,11 @@ const MenuGroup = ({ title = '', items = [] }) => {
 export const Sidebar = () => {
   return (
     <div className='flex-0 flex flex-no-wrap h-full' id="Sidebar">
-      <div className='w-64 absolute sm:relative bg-gray-900 border-r-2 border-gray-700 shadow md:h-full flex-col justify-between hidden sm:flex'>
-        <div className='flex-none h-16 px-6 w-full flex items-center'>
-          <FilmIcon className='h-8 w-auto text-red-400 sm:block hidden' />
-          <p className='sm:block hidden sm:ml-3 font-mono'>Movie{'<>'}Trailer</p>
-          <p className='sm:block hidden text-red-500'>.</p>
+      <div className='w-64 absolute sm:relative bg-gray-900 border-r-2 border-gray-800 shadow md:h-full flex-col justify-between hidden sm:flex'>
+        <div className='flex-none h-24 w-full pt-5 flex justify-center items-center'>
+          <img src="./logo.png" className="h-full" />
+          <p className='sm:block hidden sm:ml-3 font-mono font-semibold'>Movie Trailers</p>
+          <p className='sm:block hidden text-red-500 font-black'>.</p>
         </div>
         <div className='flex-grow items'>
           <MenuGroup title="Menu" items={Menu} />

@@ -31,8 +31,19 @@ p, a, input {
 }
 
 #Sidebar .items .item:hover svg,
-#Sidebar .items .item:hover p {
-  color: rgba(229, 231, 235, 1);
+#Sidebar .items .item:hover p  {
   transition-timing-function: linear;
   transition-duration: 200ms;
+}
+
+#Sidebar .items .item:hover svg {
+  color: rgba(248, 113, 113, 1);
+}
+
+#Sidebar .items .item:hover p {
+  color: rgba(229, 231, 235, 1);
+}
+
+.aux {
+  background-color: rgba(132, 50, 62, 1);
 }
