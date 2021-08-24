@@ -41,6 +41,37 @@
   - .\components\Elements\Spinner
   - .\features\misc\routes
 
-### Day 3 (2021-08-22) (...)
+### Day 3 (2021-08-22) (1 hour 30 min, acc: 8 hours)
 
-* 
+* Front-end
+  - navbar setup
+  - main layout component: MainLayout
+
+### Day 4 (2021-08-23) (6 hours, acc: 14 hours)
+
+#### Part 1 (7 hours)
+
+* Front-end
+  - navbar setup
+  - main layout component: MainLayout
+  - update component elements
+  - create features
+    * popular movies component
+    * upcoming movies component
+    * search component initialization
+  - set storage component
+
+#### Part 2 (4 hours)
+
+* Back-end
+  - initialize setup
+  - create config and express elements
+  - create routes folders and test route
+
+### Day 5 (2021-08-24) (...)
+
+#### Part 1 (2 hours)
+
+* Back-end
+  - Fix setup environment
+  - server running
