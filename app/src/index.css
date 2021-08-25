@@ -5,6 +5,12 @@
 @tailwind utilities;
 
 
+:root {
+  --main-hover-color-08: rgba(220, 38, 38, 0.8);
+  --main-hover-color-07: rgba(220, 38, 38, 0.7);
+  --main-hover-color-04: rgba(220, 38, 38, 0.4);
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
@@ -44,6 +50,53 @@ p, a, input {
   color: rgba(229, 231, 235, 1);
 }
 
-.aux {
-  background-color: rgba(132, 50, 62, 1);
+.overflow-block-hidden {
+  overflow-block: hidden;
 }
+
+.max-w-20 {
+  max-width: 5rem;
+}
+
+.min-h-main-layout {
+  min-height: 524px;
+  overflow-y: scroll;
+}
+
+@media (min-width: 500px) {
+  .xs\:grid-cols-2 {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--main-hover-color-08);
+}
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+  width: 5px;
+  background-color: #0d0a10;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 10px;
+  border-radius: 10px !important;
+  background: var(--main-hover-color-07);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+  background: var(--main-hover-color-04);
+}
+
