@@ -23,6 +23,37 @@ module.exports = (app) => {
     return res.json({ user: "Ola" }).status(200)
   })
 
+  route.get('/popular-movies', (req, res) => {
+    const url = 'https://data-imdb1.p.rapidapi.com/movie/order/byPopularity/'
+
+    const offset = parseInt(req.query?.offset) || 0
+    const pageSize = 5
+
+    axios.request(getDefaultDataImdbOptions(url))
+      .then((response) => {
+        const data = response.data["Movie Order By Popularity"]
+        const baseUrl = "https://data-imdb1.p.rapidapi.com/movie/id/"
+
+        const movieRequests = []
+
+        for (let i = offset; i < pageSize + offset && i < data.length; i++) {
+          movieRequests.push(axios.request(getDefaultDataImdbOptions(getUrl(baseUrl, data[i]["imdb_id"]))))
+        }
+
+        axios.all(movieRequests)
+          .then(axios.spread((...responses) => {
+            return res.json({ movies: responses.map((res => res.data[Object.keys(res.data)[0]])) }).status(200)
+          }))
+          .catch(errors => {
+            console.error(errors)
+            return res.json({ message: "Couldn't retrieve data" }).status(404)
+          })
+      }).catch(err => {
+        console.error(err)
+        return res.json({ message: "Couldn't retrieve data" }).status(404)
+      })
+  })
+
   route.get('/upcoming-movies', (req, res) => {
     const url = 'https://data-imdb1.p.rapidapi.com/movie/order/upcoming/'
 
@@ -48,16 +79,15 @@ module.exports = (app) => {
 
         axios.all(movieRequests)
           .then(axios.spread((...responses) => {
-            const moviesData = []
-            responses.forEach(res => moviesData.push(res.data))
-
-            return res.json({ movies: moviesData }).status(200)
+            return res.json({ movies: responses.map((res => res.data[Object.keys(res.data)[0]])) }).status(200)
           }))
           .catch(errors => {
             console.error(errors)
+            return res.json({ message: "Couldn't retrieve data" }).status(404)
           })
       }).catch(err => {
         console.error(err)
+        return res.json({ message: "Couldn't retrieve data" }).status(404)
       })
   })
 }

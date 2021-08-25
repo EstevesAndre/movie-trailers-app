@@ -1,9 +1,11 @@
 import { axios } from '@/lib/axios'
 
-export const getPopularMovies = () => {
-  return axios.get('/popular-movies')
+const imdb = "/api/imdb"
+
+export const getPopularMovies = (offset) => {
+  return axios.get(`${imdb}/popular-movies?offset=${offset}`)
 }
 
 export const getUpcomingMovies = (offset) => {
-  return axios.get(`/api/imdb/upcoming-movies?offset=${offset}`)
+  return axios.get(`${imdb}/upcoming-movies?offset=${offset}`)
 }

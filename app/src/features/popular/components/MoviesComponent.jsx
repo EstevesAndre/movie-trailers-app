@@ -3,7 +3,7 @@ import { Navigate } from "react-router-dom"
 import { Button } from "@/components/Elements/Button/Button"
 import { MoviesList } from './MoviesList'
 
-import { useUpcomingMovies } from "../hooks/useMovies" // usePopularMovies
+import { useUpcomingMovies, usePopularMovies } from "../hooks/useMovies"
 
 const MoviesComponentLayout = ({ children, title, page, query, className }) => {
 
@@ -11,18 +11,22 @@ const MoviesComponentLayout = ({ children, title, page, query, className }) => {
   return (
     <div className={clsx("flex h-full w-full md:w-9/12 flex-col", className)}>
       <p className="text-xl font-semibold text-center md:text-left">{title}</p>
-      <div className="mt-6 md:mt-5 md:pr-3 md:overflow-y-scroll">
-        {!query?.isLoading && !query?.data?.movies?.length ? (
+      {(!query?.isLoading && query?.isError) ? (
+        <div className="flex-grow">
           <p>No movies found!</p>
-        ) : children}
-      </div>
+        </div>
+      ) : (
+        <div className="mt-6 md:mt-5 md:pr-3 md:overflow-y-scroll">
+          {children}
+        </div>
+      )}
       <Button className="mt-6 md:mt-3 mx-auto md:mx-2" onClick={() => Navigate(`/${page}`)}>See more</Button>
     </div>
   )
 }
 
 export const PopularMovies = ({ className }) => {
-  const moviesQuery = null//usePopularMovies()
+  const moviesQuery = usePopularMovies()
 
   return (
     <MoviesComponentLayout
@@ -31,7 +35,7 @@ export const PopularMovies = ({ className }) => {
       query={moviesQuery}
       className={className}
     >
-      <MoviesList content={[]} />
+      <MoviesList isLoading={moviesQuery.isLoading} isSuccess={moviesQuery.isSuccess} isError={moviesQuery.isError} content={moviesQuery?.data?.movies || []} />
     </MoviesComponentLayout>
   )
 }
@@ -46,7 +50,7 @@ export const UpcomingMovies = ({ className }) => {
       query={moviesQuery}
       className={className}
     >
-      <MoviesList isLoading={moviesQuery.isLoading} content={moviesQuery?.data?.movies || []} />
+      <MoviesList released={false} isLoading={moviesQuery.isLoading} isSuccess={moviesQuery.isSuccess} isError={moviesQuery.isError} content={moviesQuery?.data?.movies || []} />
     </MoviesComponentLayout>
   )
 }

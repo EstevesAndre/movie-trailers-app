@@ -2,11 +2,11 @@ import { useQuery } from 'react-query'
 import { defaultQueryConfig } from '@/lib/react-query'
 import { getPopularMovies, getUpcomingMovies } from '../api'
 
-export const usePopularMovies = () => {
+export const usePopularMovies = (offset = 0) => {
   return useQuery({
     ...defaultQueryConfig,
-    queryKey: ['popularMovies'],
-    queryFn: () => getPopularMovies(),
+    queryKey: [`popularMovies${offset}`],
+    queryFn: () => getPopularMovies(offset),
   })
 }
 
