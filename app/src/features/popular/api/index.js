@@ -4,6 +4,6 @@ export const getPopularMovies = () => {
   return axios.get('/popular-movies')
 }
 
-export const getUpcomingMovies = () => {
-  return axios.get('/upcoming-movies')
+export const getUpcomingMovies = (offset) => {
+  return axios.get(`/api/imdb/upcoming-movies?offset=${offset}`)
 }

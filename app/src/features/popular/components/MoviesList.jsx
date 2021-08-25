@@ -1,6 +1,7 @@
 
-export const MoviesList = ({ content }) => {
-  const mockData = [0, 1, 2, 3, 4, ...content]
+export const MoviesList = ({ isLoading, content }) => {
+  const mockData = [0, 1, 2, 3, 4]
+  console.log(isLoading, content)
   return (
     <div className="h-full w-full md:flex grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 sm:gap-x-3 md:grid-cols-none gap-y-5 md:flex-col">
       {mockData.map((value, index) => (

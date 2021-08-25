@@ -10,10 +10,10 @@ export const usePopularMovies = () => {
   })
 }
 
-export const useUpcomingMovies = () => {
+export const useUpcomingMovies = (offset = 0) => {
   return useQuery({
-    ...defaultQueryConfig,
-    queryKey: ['upcomingMovies'],
-    queryFn: () => getUpcomingMovies(),
+    defaultQueryConfig,
+    queryKey: [`upcomingMovies${offset}`],
+    queryFn: () => getUpcomingMovies(offset),
   })
 }

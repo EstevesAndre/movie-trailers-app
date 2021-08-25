@@ -12,6 +12,10 @@ const getDefaultDataImdbOptions = (url) => {
   }
 }
 
+const getUrl = (baseUrl, imdb_id) => {
+  return baseUrl + imdb_id + "/"
+}
+
 module.exports = (app) => {
   app.use('/imdb', route)
 
@@ -19,8 +23,11 @@ module.exports = (app) => {
     return res.json({ user: "Ola" }).status(200)
   })
 
-  route.get('/upcoming', (req, res) => {
+  route.get('/upcoming-movies', (req, res) => {
     const url = 'https://data-imdb1.p.rapidapi.com/movie/order/upcoming/'
+
+    const offset = parseInt(req.query?.offset) || 0
+    const pageSize = 5
 
     axios.request(getDefaultDataImdbOptions(url))
       .then((response) => {
@@ -33,20 +40,19 @@ module.exports = (app) => {
           })
 
         const baseUrl = "https://data-imdb1.p.rapidapi.com/movie/id/"
-        const one = getDefaultDataImdbOptions(baseUrl + data[0]["imdb_id"] + "/")
-        const two = getDefaultDataImdbOptions(baseUrl + data[1]["imdb_id"] + "/")
-        const three = getDefaultDataImdbOptions(baseUrl + data[2]["imdb_id"] + "/")
 
-        axios.request(one)
-          .then((response) => {
-            const data2 = response.data
-            // const responseOne = responses[0]
-            // const responseTwo = responses[1]
-            // const responseThree = responses[2]
+        const movieRequests = []
+        for (let i = offset; i < pageSize + offset && i < data.length; i++) {
+          movieRequests.push(axios.request(getDefaultDataImdbOptions(getUrl(baseUrl, data[i]["imdb_id"]))))
+        }
 
-            // console.log(responseOne, responseTwo, responseThree)
-            return res.json({ data2, data }).status(200)
-          })
+        axios.all(movieRequests)
+          .then(axios.spread((...responses) => {
+            const moviesData = []
+            responses.forEach(res => moviesData.push(res.data))
+
+            return res.json({ movies: moviesData }).status(200)
+          }))
           .catch(errors => {
             console.error(errors)
           })
