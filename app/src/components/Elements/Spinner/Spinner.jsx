@@ -1,6 +1,7 @@
 import SyncLoader from 'react-spinners/SyncLoader'
 
 const sizes = {
+  xs: 10,
   sm: 15,
   md: 20,
   lg: 25,
