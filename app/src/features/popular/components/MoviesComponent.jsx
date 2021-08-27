@@ -7,20 +7,19 @@ import { useUpcomingMovies, usePopularMovies } from "../hooks/useMovies"
 
 const MoviesComponentLayout = ({ children, title, page, query, className }) => {
 
-  console.log(query)
   return (
-    <div className={clsx("flex h-full w-full md:w-9/12 flex-col", className)}>
-      <p className="text-xl font-semibold text-center md:text-left">{title}</p>
+    <div className={clsx("flex h-full w-full lg:w-9/12 flex-col", className)}>
+      <p className="text-xl font-semibold text-center lg:text-left">{title}</p>
       {(!query?.isLoading && query?.isError) ? (
         <div className="flex-grow">
           <p>No movies found!</p>
         </div>
       ) : (
-        <div className="mt-6 md:mt-5 md:pr-3 md:overflow-y-scroll">
+        <div className="mt-6 lg:mt-5 lg:pr-3 lg:overflow-y-scroll">
           {children}
         </div>
       )}
-      <Button className="mt-6 md:mt-3 mx-auto md:mx-2" onClick={() => Navigate(`/${page}`)}>See more</Button>
+      <Button className="mt-6 lg:mt-3 mx-auto lg:mx-2" onClick={() => Navigate(`/${page}`)}>See more</Button>
     </div>
   )
 }
