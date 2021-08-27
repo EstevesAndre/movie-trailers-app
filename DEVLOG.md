@@ -68,10 +68,49 @@
   - create config and express elements
   - create routes folders and test route
 
-### Day 5 (2021-08-24) (...)
+### Day 5 (2021-08-24) (4 hours, acc: 18 hours)
 
 #### Part 1 (2 hours)
 
 * Back-end
   - Fix setup environment
   - server running
+
+#### Part 2 (2 hours)
+
+* Front-end
+  - Right side cards layout
+
+
+### Day 6 (2021-08-25) (8 hours, acc: 26 hours)
+
+#### Part 1 (2 hours)
+
+* Front-end
+  - Add responsiveness to the current layout
+
+#### Part 2 (6 hours)
+
+* Front-end
+  - Top rated movies view
+  - Movie Card
+  - Add responsiveness
+
+* Back-end
+  - Top rated movies routes and info aggregation
+  - IMDB routes code refactoring
+
+### Day 5 (2021-08-26) (8 hours, acc: 34 hours | 1 day and 10 hours)
+
+* Front-end
+  - Search bar handler
+  - Request handler
+  - Front page view with Movie Cards
+  - Start Movie info view modal
+  - Add responsiveness
+
+* Back-end
+  - Add search route and info aggregation
+  - Create YouTube route and info filtering and handling
+
+### Day 5 (2021-08-27) ()
