@@ -16,15 +16,16 @@ const queryConfig = {
   },
 }
 
-export const defaultQueryConfig = {
+export const freshQueryConfig = {
   queries: {
     useErrorBoundary: true,
     refetchOnWindowFocus: false,
     retry: 3,
-    staleTime: 86400000,
-    cacheTime: 86400000,
+    cacheTime: 60000,
   },
 }
+
+export const defaultQueryConfig = queryConfig
 
 export const queryClient = new QueryClient({ defaultOptions: queryConfig })
 
