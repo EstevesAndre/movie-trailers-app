@@ -20,7 +20,8 @@ module.exports = (app) => {
     youtube.search
       .list({
         part: 'id,snippet',
-        q: movie,
+        q: `${movie} Trailers`,
+        maxResults: 4,
       }).then((response) => {
         const data = response.data
 

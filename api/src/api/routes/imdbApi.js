@@ -35,11 +35,11 @@ module.exports = (app) => {
           directors: data?.directors,
           writers: data?.writers,
           actorList: data?.actorList?.slice(0, 6),
-          genres: data?.genreList.map(v => v.value),
+          genres: data?.genreList?.map(v => v.value),
           imDbRating: data?.imDbRating,
           backdrop: data?.posters?.backdrops[0]?.link || null,
-          images: data?.images?.items.slice(0, 6),
-          similars: data?.similars.slice(0, 6)
+          images: data?.images?.items?.slice(0, 6),
+          similars: data?.similars?.slice(0, 6)
         }
 
         return res.json({ info: filteredData }).status(200)

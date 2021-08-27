@@ -39,7 +39,22 @@ const requestDefaultInformation = (res, url, key, offset, orderByReleaseDate = f
 
       axios.all(movieRequests)
         .then(axios.spread((...responses) => {
-          return res.json({ movies: responses.map((res => res.data[Object.keys(res.data)[0]])) }).status(200)
+          return res.json({
+            movies: responses.map(res => {
+              const item = res.data[Object.keys(res.data)[0]]
+
+              return {
+                imdb_id: item.imdb_id,
+                title: item.title,
+                year: item.year,
+                image_url: item.image_url,
+                release: item.release,
+                banner: item.banner,
+                gen: item.gen,
+                rating: item.rating
+              }
+            })
+          }).status(200)
         }))
         .catch(errors => {
           console.error(errors)
