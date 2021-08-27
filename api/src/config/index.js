@@ -28,5 +28,9 @@ module.exports = {
    */
   api: {
     prefix: '/api',
+
+    imdbApiKey: 'k_0ue6efwd',
+
+    youTubeDataApi_v3: 'AIzaSyDHl5gFs13Awhn-VHARjubZip0C81D3J20',
   }
 }

@@ -16,6 +16,41 @@ const getUrl = (baseUrl, imdb_id) => {
   return baseUrl + imdb_id + "/"
 }
 
+const requestDefaultInformation = (res, url, key, offset, orderByReleaseDate = false, pageSize = 5) => {
+  axios.request(getDefaultDataImdbOptions(url))
+    .then((response) => {
+      var data = response.data[key]
+
+      if (orderByReleaseDate)
+        data.sort((a, b) => {
+          const da = new Date(a.release), db = new Date(b.release)
+          if (da > db) return 1
+          if (da < db) return -1
+          return 0
+        })
+
+      const baseUrl = "https://data-imdb1.p.rapidapi.com/movie/id/"
+
+      const movieRequests = []
+
+      for (let i = offset; i < pageSize + offset && i < data.length; i++) {
+        movieRequests.push(axios.request(getDefaultDataImdbOptions(getUrl(baseUrl, data[i]["imdb_id"]))))
+      }
+
+      axios.all(movieRequests)
+        .then(axios.spread((...responses) => {
+          return res.json({ movies: responses.map((res => res.data[Object.keys(res.data)[0]])) }).status(200)
+        }))
+        .catch(errors => {
+          console.error(errors)
+          return res.json({ message: "Couldn't retrieve data" }).status(404)
+        })
+    }).catch(err => {
+      console.error(err)
+      return res.json({ message: "Couldn't retrieve data" }).status(404)
+    })
+}
+
 module.exports = (app) => {
   app.use('/imdb', route)
 
@@ -24,70 +59,50 @@ module.exports = (app) => {
   })
 
   route.get('/popular-movies', (req, res) => {
-    const url = 'https://data-imdb1.p.rapidapi.com/movie/order/byPopularity/'
-
-    const offset = parseInt(req.query?.offset) || 0
-    const pageSize = 5
-
-    axios.request(getDefaultDataImdbOptions(url))
-      .then((response) => {
-        const data = response.data["Movie Order By Popularity"]
-        const baseUrl = "https://data-imdb1.p.rapidapi.com/movie/id/"
-
-        const movieRequests = []
-
-        for (let i = offset; i < pageSize + offset && i < data.length; i++) {
-          movieRequests.push(axios.request(getDefaultDataImdbOptions(getUrl(baseUrl, data[i]["imdb_id"]))))
-        }
-
-        axios.all(movieRequests)
-          .then(axios.spread((...responses) => {
-            return res.json({ movies: responses.map((res => res.data[Object.keys(res.data)[0]])) }).status(200)
-          }))
-          .catch(errors => {
-            console.error(errors)
-            return res.json({ message: "Couldn't retrieve data" }).status(404)
-          })
-      }).catch(err => {
-        console.error(err)
-        return res.json({ message: "Couldn't retrieve data" }).status(404)
-      })
+    requestDefaultInformation(
+      res,
+      'https://data-imdb1.p.rapidapi.com/movie/order/byPopularity/',
+      "Movie Order By Popularity",
+      parseInt(req.query?.offset) || 0
+    )
   })
 
   route.get('/upcoming-movies', (req, res) => {
-    const url = 'https://data-imdb1.p.rapidapi.com/movie/order/upcoming/'
-
-    const offset = parseInt(req.query?.offset) || 0
-    const pageSize = 5
-
-    axios.request(getDefaultDataImdbOptions(url))
-      .then((response) => {
-        const data = response.data["Movies Upcoming"]
-          .sort((a, b) => {
-            const da = new Date(a.release), db = new Date(b.release)
-            if (da > db) return 1
-            if (da < db) return -1
-            return 0
-          })
-
-        const baseUrl = "https://data-imdb1.p.rapidapi.com/movie/id/"
-
-        const movieRequests = []
-        for (let i = offset; i < pageSize + offset && i < data.length; i++) {
-          movieRequests.push(axios.request(getDefaultDataImdbOptions(getUrl(baseUrl, data[i]["imdb_id"]))))
-        }
-
-        axios.all(movieRequests)
-          .then(axios.spread((...responses) => {
-            return res.json({ movies: responses.map((res => res.data[Object.keys(res.data)[0]])) }).status(200)
-          }))
-          .catch(errors => {
-            console.error(errors)
-            return res.json({ message: "Couldn't retrieve data" }).status(404)
-          })
-      }).catch(err => {
-        console.error(err)
-        return res.json({ message: "Couldn't retrieve data" }).status(404)
-      })
+    requestDefaultInformation(
+      res,
+      'https://data-imdb1.p.rapidapi.com/movie/order/upcoming/',
+      "Movies Upcoming",
+      parseInt(req.query?.offset) || 0,
+      true
+    )
   })
+
+  route.get('/top-rated-movies', (req, res) => {
+    requestDefaultInformation(
+      res,
+      'https://data-imdb1.p.rapidapi.com/movie/order/byRating/',
+      "Movie Order By Rating",
+      parseInt(req.query?.offset) || 0,
+      false,
+      8
+    )
+  })
+
+
+  route.get('/search-by-title', (req, res) => {
+    const search = req.query?.search || ''
+
+    if (search === '') return res.json({ message: "No Search label given" }).status(400)
+
+    requestDefaultInformation(
+      res,
+      `https://data-imdb1.p.rapidapi.com/movie/imdb_id/byTitle/${encodeURIComponent(search)}/`,
+      "Result",
+      parseInt(req.query?.offset) || 0,
+      false,
+      6
+    )
+  })
+
+
 }
