@@ -1,6 +1,6 @@
 import { useQuery } from 'react-query'
-import { freshQueryConfig } from '@/lib/react-query'
-import { getMovieInformation } from '../api'
+import { defaultQueryConfig, freshQueryConfig } from '@/lib/react-query'
+import { getMovieInformation, getMovieTrailers } from '../api'
 
 export const useMovieInformation = (imdb_id) => {
   return useQuery(
@@ -9,6 +9,16 @@ export const useMovieInformation = (imdb_id) => {
       enabled: Boolean(imdb_id),
       queryKey: ['movieInformation', imdb_id],
       queryFn: () => getMovieInformation(imdb_id),
+    }
+  )
+}
+
+export const useMovieTrailers = (title) => {
+  return useQuery(
+    {
+      ...defaultQueryConfig,
+      queryKey: ['movieTrailers', title],
+      queryFn: () => getMovieTrailers(title),
     }
   )
 }
