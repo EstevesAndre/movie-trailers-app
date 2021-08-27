@@ -32,7 +32,7 @@ const MenuGroup = ({ title = '', items = [] }) => {
 export const Sidebar = () => {
   return (
     <div className='flex-0 flex flex-no-wrap h-full' id="Sidebar">
-      <div className='w-64 absolute md:relative bg-gray-900 border-r-2 border-gray-800 shadow md:h-full flex-col justify-between hidden md:flex'>
+      <div className='w-64 absolute lg:relative bg-gray-900 shadow lg:h-full flex-col justify-between hidden lg:flex'>
         <div className='flex-none h-24 w-full pt-5 flex justify-center items-center'>
           <img src="./logo.png" className="h-full" />
           <p className='sm:block hidden sm:ml-3 font-mono font-semibold'>Movie Trailers</p>
