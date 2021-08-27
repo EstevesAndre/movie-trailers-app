@@ -65,7 +65,7 @@ const MoviesListCard = ({ className, search, isLoading, isSuccess, isError, cont
         </div>
       }
       <MovieModal
-        className={movieSelectedIndex != null ? "scale-100" : "scale-0"}
+        className={movieSelectedIndex != null ? "scale-100" : ""}
         basicContent={content[movieSelectedIndex] || null}
         onClose={() => setMovieSelectedIndex(null)}
       />

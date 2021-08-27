@@ -108,6 +108,10 @@ p, a, input, span {
   animation: skeleton-loading 1s linear infinite alternate;
 }
 
+.skeleton-animation {
+  animation: skeleton-loading 1s linear infinite alternate;
+}
+
 .skeleton-text {
   height: 0.75rem;
   margin-bottom: 0.25rem;

@@ -11,7 +11,7 @@ export const Landing = ({ title, current = "Search a movie" }) => {
           <p className="text-4xl font-mono font-semibold text-gray-100 text-center sm:inline-block hidden sm:mr-5">{title}</p>
           <p className="text-4xl font-mono font-normal text-gray-200 text-center sm:inline-block mt-3 sm:mt-0">{current}</p>
         </div>
-        <SearchBar className="flex-grow w-full " />
+        <SearchBar className="flex-grow w-full" />
         <TopRatedMovies styles="pb-5 pt-10" />
       </div>
       <RightSideBar />
