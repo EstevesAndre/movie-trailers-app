@@ -15,8 +15,8 @@ export const FilterElement = ({ name = '', options = [] }) => {
     <Menu as="div" className="relative ">
       {({ open }) => (
         <>
-          <div>
-            <Menu.Button className="inline-flex justify-center w-full rounded-lg border border-gray-400 shadow-sm px-4 py-2 bg-gray-700 text-sm font-medium text-gray-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
+          <div className="h-full">
+            <Menu.Button className="inline-flex justify-center w-full h-full items-center rounded-lg border border-gray-400 shadow-sm px-4 py-2 bg-gray-700 text-sm font-medium text-gray-200 hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500">
               {`${name}: ${selected.name}`}
               <ChevronDownIcon className="-mr-1 ml-2 h-5 w-5" aria-hidden="true" />
             </Menu.Button>

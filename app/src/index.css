@@ -25,7 +25,7 @@ code {
     monospace;
 }
 
-p, a, input {
+p, a, input, span {
   color: white;
 }
 
@@ -58,9 +58,43 @@ p, a, input {
   max-width: 5rem;
 }
 
+.max-w-96 {
+  max-width: 24rem;
+}
+
 .min-h-main-layout {
   min-height: 524px;
   overflow-y: scroll;
+}
+
+.limit-18ch {
+  max-width: min(100%, 18ch);
+}
+
+.onErrorSize {
+  padding: 3rem 1.5rem;
+}
+
+.xs\:onErrorSize {
+  padding: 1rem 0.5rem;
+}
+
+.adjust-img-ratio {
+  object-fit: cover;
+  width: 100%;
+}
+
+.ratio {
+  height: calc(100% - 84px);
+  width: auto;
+}
+
+.h-104 {
+  height: 468px;
+}
+
+.max-w-64px {
+  max-width: 84px;
 }
 
 @media (min-width: 500px) {

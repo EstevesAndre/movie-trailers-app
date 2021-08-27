@@ -1,5 +1,5 @@
 import { axios } from '@/lib/axios'
 
-export const searchMovies = (data) => {
-  return axios.get('/search-by-title', data)
+export const getMoviesByTitle = (search, offset) => {
+  return axios.get(`/api/imdb/search-by-title?search=${search}&offset=${offset}`)
 }
