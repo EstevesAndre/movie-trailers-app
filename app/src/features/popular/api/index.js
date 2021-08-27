@@ -9,3 +9,7 @@ export const getPopularMovies = (offset) => {
 export const getUpcomingMovies = (offset) => {
   return axios.get(`${imdb}/upcoming-movies?offset=${offset}`)
 }
+
+export const getTopRatedMovies = (offset) => {
+  return axios.get(`${imdb}/top-rated-movies?offset=${offset}`)
+}
