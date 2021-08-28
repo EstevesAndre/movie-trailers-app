@@ -11,8 +11,8 @@ const queryConfig = {
     useErrorBoundary: true,
     refetchOnWindowFocus: false,
     retry: 3,
-    staleTime: 86400000,
-    cacheTime: 86400000,
+    staleTime: 345600000, // day => 86400000, 4 days => 345600000
+    cacheTime: 345600000,
   },
 }
 
