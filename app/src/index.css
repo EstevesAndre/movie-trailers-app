@@ -72,14 +72,54 @@ p, a, input, span {
   height: 468px;
 }
 
-.max-w-64px {
-  max-width: 84px;
+.max-h-auto {
+  max-height: 1000vh;
+}
+
+.max-w-xxs {
+  max-width: 14rem;
 }
 
 @media (min-width: 500px) {
   .xs\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
+
+.landscape {
+  padding: 1rem 0rem;
+  width: 100%;
+  height: 50vh;
+  top: 50%
+}
+
+@media (min-width: 840px) {
+  .landscape {
+    padding: 1rem 3rem;
+    width: 100%;
+    height: 50vh;
+    
+  }
+}
+
+@media (min-width: 1200px) {
+  .landscape {
+    padding: 1rem 1.5rem;
+    width: 100%;
+    height: 100%;
+    top: 0;
+  }
+
+  .landscape-parent {
+    height: 100%;
+  }
+}
+
+@media (max-width: 815px) and (orientation: landscape) {
+    .landscape {
+      padding: 0 0rem;
+      height: 90vh;
+    }
 }
 
 .skeleton {
