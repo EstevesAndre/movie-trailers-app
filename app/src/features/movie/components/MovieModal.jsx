@@ -41,12 +41,10 @@ const BaseModalComponent = ({ className, children, onClose, isLoading, backdrop 
 export const MovieModal = ({ className, basicContent, onClose }) => {
 
   const content = useMovieInformation(basicContent?.imdb_id || null)
-  console.log(content?.data?.info)
-  console.log(basicContent)
 
   if (!basicContent) return (<BaseModalComponent className={className}></BaseModalComponent>)
 
-  if (content.isSuccess && !content.data) {
+  if (!content.isLoading && content.isSuccess && !content.data) {
     return (
       <BaseModalComponent className={className} onClose={onClose} hasFail={true}>
         <div className="flex-grow self-center flex flex-col justify-center">

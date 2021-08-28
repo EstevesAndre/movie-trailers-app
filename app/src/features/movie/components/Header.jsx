@@ -11,7 +11,7 @@ const ImageComponent = ({ className, isLoading, img_low_res, img_high_res, genre
   }
 
   return (
-    <div className={clsx(className)}>
+    <div className={clsx(className, "max-w-md")}>
       <img
         src={img_low_res}
         className={imageClassName}
@@ -33,7 +33,7 @@ const ImageComponent = ({ className, isLoading, img_low_res, img_high_res, genre
               <div key={index} className="px-3 py-4 border-2 border-gray-600 rounded-xl skeleton skeleton-text" />
             ))
           ) : (
-            genres.map((genre, index) => (
+            genres.slice(0, 4).map((genre, index) => (
               <div key={index}>
                 <p className="px-3 py-1 text-center font-thin border-2 border-red-500 rounded-xl">{genre}</p>
               </div>
@@ -62,9 +62,7 @@ const KeyValueLabel = ({ className, classNameCh1 = "mr-2", classNameCh2 = "inlin
 export const Header = ({ className = "", isLoading = false, basicContent, content }) => {
   const mockData = [1, 2, 3, 4]
 
-  console.log(content)
-
-  if (content === undefined) {
+  if (!isLoading && (content === undefined || (!content.title && !content.year))) {
     return (
       <div className={clsx("flex flex-col md:flex-row justify-start gap-x-5", className)}>
         <ImageComponent
@@ -118,7 +116,7 @@ export const Header = ({ className = "", isLoading = false, basicContent, conten
         )}
         <KeyValueLabel className={clsx(isLoading ? "flex-0 h-24 w-full" : "flex-1")} isLoading={isLoading} classNameCh2="" label="Writers" color="border-red-400" value={content?.writers} />
         <KeyValueLabel className={clsx(isLoading ? "flex-0 h-20 w-full" : "flex-1 flex flex-col justify-end")} classNameCh1="mr-auto" classNameCh2="overflow-hidden" isLoading={isLoading} label="Plot" color="border-blue-400" value={content?.plot} />
-        <KeyValueLabel className={clsx(isLoading ? "w-full h-10" : "", "flex-0 pt-5")} label="Awards" color="border-yellow-200" value={content?.awards} />
+        <KeyValueLabel className={clsx(isLoading ? "w-full h-10" : "", "flex-0 pt-5")} isLoading={isLoading} label="Awards" color="border-yellow-200" value={content?.awards} />
       </div>
     </div>
   )
