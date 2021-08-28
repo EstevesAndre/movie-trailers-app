@@ -2,13 +2,38 @@ import { useState } from 'react'
 import { Menu } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/solid'
 
-export const FilterElement = ({ name = '', options = [] }) => {
-  const [selected,] = useState(options[options.length - 1])
+export const FilterElement = ({ name = '', options = [], setValue = () => { }, type = "radio" }) => {
+  const [selected, setSelected] = useState({ index: options.findIndex(item => item.checked), ...options.find(item => item.checked) })
+  const [inputOptions, setInputOptions] = useState(options.slice())
 
-  const handleChange = () => {
-    // selected.checked = false
-    // options[index].checked = true
-    // setSelected(options[index])
+  const handleChange = (index) => {
+    const copy = inputOptions.slice()
+
+    if (type === "radio") {
+      copy[selected.index].checked = false
+      copy[index].checked = true
+      setSelected({ index: index, ...copy[index] })
+      setInputOptions(copy)
+      setValue(copy)
+      return
+    }
+
+    if (copy[index].name === "All") {
+      const newState = !inputOptions[index].checked
+      copy.forEach(item => item.checked = newState)
+      setSelected({ name: newState ? "All" : "None" })
+    } else {
+      if (copy[index].checked) {
+        copy.find(item => item.name === "All").checked = false
+      }
+      copy[index].checked = !copy[index].checked
+
+      setSelected({
+        name: `${copy.reduce((acc, cur) => acc + (cur.checked ? 1 : 0), 0)} selected`
+      })
+    }
+    setInputOptions(copy)
+    setValue(copy)
   }
 
   return (
@@ -24,14 +49,14 @@ export const FilterElement = ({ name = '', options = [] }) => {
 
           {open && (
             <div>
-              <Menu.Items static className="origin-top-right absolute z-40 right-0 mt-2 w-56 rounded-lg shadow-lg bg-gray-700 border-gray-400 text-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none">
+              <Menu.Items static className="origin-top-right absolute z-40 right-0 mt-2 w-full rounded-lg shadow-lg bg-gray-700 border-gray-400 text-gray-200 ring-1 ring-black ring-opacity-5 focus:outline-none">
                 <div className="py-3">
-                  {options.map((option, index) => (
+                  {inputOptions.map((option, index) => (
                     <Menu.Item key={index}>
                       <div className="px-4 py-1">
-                        <label className="inline-flex items-center">
-                          <input type="radio" checked={option.checked} onChange={handleChange} />
-                          <span className="ml-2">{option.name}</span>
+                        <label className="px-2 py-1 flex items-center cursor-pointer hover:border-gray-100 border-2 border-gray-700 duration-200 rounded-xl" onClick={(e) => { e.stopPropagation() }}>
+                          <input type={type} checked={option.checked} onChange={() => { }} onClick={(e) => { e.stopPropagation(); handleChange(index) }} />
+                          <p className="ml-2 w-full">{option.name}</p>
                         </label>
                       </div>
                     </Menu.Item>

@@ -1,26 +1,84 @@
-import { useState } from 'react'
-import { SearchIcon } from '@heroicons/react/outline'
-import { FilterElement } from './FilterElement'
+import { useState, useEffect } from 'react'
+
 import { Card } from '@/components/Elements/Card/Card'
-import { useMoviesByTitle } from '../hooks/useMoviesSearch'
-import clsx from 'clsx'
 import { Button } from '@/components/Elements/Button/Button'
+
 import { MovieModal } from '@/features/movie/components/MovieModal'
 
+import { SearchIcon } from '@heroicons/react/outline'
+
+import { FilterElement } from './FilterElement'
+
+import { useMoviesByTitle } from '../hooks/useMoviesSearch'
+
+import clsx from 'clsx'
+
 const ratingOptions = [
-  { name: "> 8.5", checked: false },
-  { name: "> 7.5", checked: false },
-  { name: "> 6.5", checked: false },
-  { name: "> 5.5", checked: false },
-  { name: "All", checked: true },
+  { name: "All", value: 0, checked: true },
+  { name: "> 8.5", value: 8.5, checked: false },
+  { name: "> 7.5", value: 7.5, checked: false },
+  { name: "> 6.5", value: 6.5, checked: false },
+  { name: "> 5.5", value: 5.5, checked: false },
 ]
 
-const mockOptions = [
-  { name: "Action", checked: true }
+const genresOptions = [
+  { name: "All", value: ["Adventure", "Action", "Family", "Fantasy", "Animation", "Drama", "Comedy", "Crime", "Sci-Fi", "Romance", "Music", "Thriller", "Mystery", "Horror", "War"], checked: true },
+  { name: "Adventure", value: "Adventure", checked: true },
+  { name: "Action", value: "Action", checked: true },
+  { name: "Family", value: "Family", checked: true },
+  { name: "Fantasy", value: "Fantasy", checked: true },
+  { name: "Animation", value: "Animation", checked: true },
+  { name: "Drama", value: "Drama", checked: true },
+  { name: "Comedy", value: "Comedy", checked: true },
+  { name: "Sci-Fi", value: "Sci-Fi", checked: true },
+  { name: "Romance", value: "Romance", checked: true },
+  { name: "Music", value: "Music", checked: true },
+  { name: "Crime", value: "Crime", checked: true },
+  { name: "Thriller", value: "Thriller", checked: true },
+  { name: "Mystery", value: "Mystery", checked: true },
+  { name: "Horror", value: "Horror", checked: true },
+  { name: "War", value: "War", checked: true },
+]
+
+const yearsOptions = [
+  { name: "All", value: [1900, 2021], checked: true },
+  { name: "2021", value: [2021, 2021], checked: true },
+  { name: "2020", value: [2020, 2020], checked: true },
+  { name: "2019", value: [2019, 2019], checked: true },
+  { name: "2018", value: [2018, 2018], checked: true },
+  { name: "2017", value: [2017, 2017], checked: true },
+  { name: "2016", value: [2016, 2016], checked: true },
+  { name: "2015", value: [2015, 2015], checked: true },
+  { name: "2015-2021", value: [2015, 2021], checked: true },
+  { name: "2010-2014", value: [2010, 2014], checked: true },
+  { name: "2005-2009", value: [2005, 2009], checked: true },
+  { name: "2000-2004", value: [2000, 2004], checked: true },
+  { name: "1990-1999", value: [1990, 1999], checked: true },
+  { name: "1980-1989", value: [1980, 1989], checked: true },
+  { name: "1950-1979", value: [1950, 1979], checked: true },
+  { name: "1900-1949", value: [1900, 1949], checked: true },
+]
+
+const contentRatingOptions = [
+  { name: "All", value: ["G", "PG", "TV-PG", "PG-13", "TV-Y", "R", "NC-17", "TV-Y7", "TV-G", "TV-MA", "TV-14"], checked: true },
+  { name: "General Audience", value: ["G"], checked: true },
+  { name: "Parental Guidance Suggested", value: ["PG", "TV-PG"], checked: true },
+  { name: "Parents Strongly Cautioned", value: ["PG-13", "TV-Y"], checked: true },
+  { name: "Restricted", value: ["R"], checked: true },
+  { name: "No Children 17 or Under", value: ["NC-17"], checked: true },
+  { name: "All Children", value: ["TV-Y"], checked: true },
+  { name: "Directed to Older Children", value: ["TV-Y7"], checked: true },
+  { name: "General Audience", value: ["TV-G"], checked: true },
+  { name: "TV Mature Audience Only", value: ["TV-MA"], checked: true },
+  { name: "Fantasy Violence", value: ["TV-Y7"], checked: true },
+  { name: "Violence", value: ["TV-PG", "TV-14", "TV-MA"], checked: true },
+  { name: "Sexuality", value: ["TV-PG", "TV-14", "TV-MA"], checked: true },
+  { name: "Language", value: ["TV-PG", "TV-14", "TV-MA"], checked: true },
+  { name: "Dialogue", value: ["TV-PG", "TV-14", "TV-MA"], checked: true },
 ]
 
 const MoviesListCard = ({ className, search, isLoading, isSuccess, isError, content }) => {
-  const mockData = [0, 1, 2, 3, 2, 3]
+  const mockData = [1, 2, 3, 4, 5, 6, 7, 8]
   const [movieSelectedIndex, setMovieSelectedIndex] = useState(null)
 
   if (isError && !isSuccess) {
@@ -73,16 +131,83 @@ const MoviesListCard = ({ className, search, isLoading, isSuccess, isError, cont
   )
 }
 
-export const SearchBar = ({ className }) => {
+export const SearchBar = ({ className, updateSearches, searchSelected }) => {
   const [search, setSearch] = useState('')
   const [searchSubmit, setSearchSubmit] = useState('')
 
-  const moviesQuery = useMoviesByTitle(searchSubmit)
+  const [ratings, setRatings] = useState(ratingOptions[0].value)
+  const [genres, setGenres] = useState(genresOptions[0].value)
+  const [years, setYears] = useState([yearsOptions[0].value])
+  const [contentRatings, setContentRatings] = useState(contentRatingOptions[0].value)
+
+  const [requestParams, setRequestParams] = useState({
+    ratings: ratings,
+    genres: genres.slice(),
+    years: years.slice(),
+    contentRatings: contentRatings.slice()
+  })
+
+  const moviesQuery = useMoviesByTitle(searchSubmit, 0, requestParams)
+
+  const setParams = (params) => {
+    setRequestParams(params)
+
+    setRatings(params.ratings)
+    setGenres(params.genres)
+    setYears(params.years)
+    setContentRatings(params.contentRatings)
+  }
+
+  const checkAll = (options) => {
+    return options[0].checked
+  }
+
+  const setRatingsValue = (options) => {
+    setRatings(options.find(item => item.checked).value)
+  }
+  const setGenresValue = (options) => {
+    if (checkAll(options)) setGenres(options[0].value)
+    else setGenres(options.slice(1).filter(item => item.checked).map(item => item.value))
+  }
+  const setYearsValue = (options) => {
+    if (checkAll(options)) setYears([options[0].value])
+    else setYears(options.slice(1).filter(item => item.checked).map(item => item.value))
+  }
+  const setContentRatingsValue = (options) => {
+    if (checkAll(options)) setContentRatings(options[0].value)
+    else {
+      const opt = new Set()
+      options
+        .slice(1)
+        .filter(item => item.checked)
+        .forEach(item => item.value.forEach(value => opt.add(value)))
+
+      setContentRatings(Array.from(opt))
+    }
+  }
 
   const onSubmit = (e) => {
     e.preventDefault()
+
+    const newParams = {
+      ratings: ratings,
+      genres: genres.slice(),
+      years: years.slice(),
+      contentRatings: contentRatings.slice()
+    }
+
+    setRequestParams(newParams)
     setSearchSubmit(search)
+    updateSearches(search, newParams)
   }
+
+  useEffect(() => {
+    if (searchSelected === -1) return
+
+    setSearch(searchSelected.name)
+    setParams(searchSelected.params)
+    setSearchSubmit(searchSelected.name)
+  }, [searchSelected])
 
   return (
     <div className={clsx(className, "flex flex-col flex-transition")}>
@@ -102,10 +227,10 @@ export const SearchBar = ({ className }) => {
           </div>
         </form>
         <div className="grid grid-flow-row gap-4 md:grid-cols-2 xl:grid-cols-4 mt-4">
-          <FilterElement name="Rating" options={ratingOptions} />
-          <FilterElement name="Genres" options={mockOptions} />
-          <FilterElement name="Year" options={mockOptions} />
-          <FilterElement name="Studio" options={mockOptions} />
+          <FilterElement name="Rating" options={ratingOptions} setValue={setRatingsValue} />
+          <FilterElement name="Genres" options={genresOptions} setValue={setGenresValue} type="checkbox" />
+          <FilterElement name="Year" options={yearsOptions} setValue={setYearsValue} type="checkbox" />
+          <FilterElement name="Content" options={contentRatingOptions} setValue={setContentRatingsValue} type="checkbox" />
         </div>
       </div>
       <MoviesListCard
