@@ -25,6 +25,8 @@ module.exports = (app) => {
       .then((response) => {
         const data = response.data
 
+        if (data?.title === null) throw new Error(data?.errorMessage)
+
         const filteredData = {
           title: data?.title,
           year: data?.year,
@@ -37,7 +39,7 @@ module.exports = (app) => {
           actorList: data?.actorList?.slice(0, 6),
           genres: data?.genreList?.map(v => v.value),
           imDbRating: data?.imDbRating,
-          backdrop: data?.posters?.backdrops[0]?.link || null,
+          backdrop: data?.posters?.backdrops[0].link || null,
           images: data?.images?.items?.slice(0, 6),
           similars: data?.similars?.slice(0, 6)
         }
@@ -45,7 +47,7 @@ module.exports = (app) => {
         return res.json({ info: filteredData }).status(200)
       }).catch(err => {
         console.error(err)
-        return res.json({ message: "Couldn't retrieve data" }).status(404)
+        res.status(404).send({ error: `Couldn't retrieve data. ${err}` })
       })
   })
 }
