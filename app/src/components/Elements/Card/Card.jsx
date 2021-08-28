@@ -1,6 +1,5 @@
 import clsx from 'clsx'
 import { useState } from 'react'
-// import { Button } from '@/components/Elements/Button'
 
 const sizes = {
   sm: 'h-80 sm:w-60 sm:h-80 max-h-80',

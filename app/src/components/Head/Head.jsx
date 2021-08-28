@@ -2,7 +2,7 @@
 import { Helmet } from 'react-helmet'
 
 export const Head = ({ title = '', description = '' }) => {
-  const defaultTitle = "Dept the case"
+  const defaultTitle = "Dept"
   return (
     <Helmet
       title={title ? `${title} | ${defaultTitle}` : undefined}
