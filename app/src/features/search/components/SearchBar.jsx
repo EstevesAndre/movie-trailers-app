@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 
 import { Card } from '@/components/Elements/Card/Card'
-import { Button } from '@/components/Elements/Button/Button'
+// import { Button } from '@/components/Elements/Button/Button'
 
 import { MovieModal } from '@/features/movie/components/MovieModal'
 
@@ -110,18 +110,18 @@ const MoviesListCard = ({ className, search, isLoading, isSuccess, isError, cont
       {search !== '' && <p className="text-3xl font-semibold text-center pb-5">Results</p>}
       <div className="flex-transition h-full flex-grow flex flex-col gap-y-10 sm:gap-x-10 sm:flex-row sm:flex-wrap items-start justify-center">
         {content.map((movie, index) => (
-          <div key={index}>
+          <div key={index} className="w-full sm:w-auto">
             <Card content={movie} size="md" setSelected={() => setMovieSelectedIndex(index)} />
           </div>
         ))}
         {content.length === 0 && search !== '' && <p className="text-xl self-center font-light">No results found for "{search}"</p>}
       </div>
-      {
+      {/* {
         content.length >= 6 &&
         <div className="mx-auto mt-5">
           <Button>Load more</Button>
         </div>
-      }
+      } */}
       <MovieModal
         className={movieSelectedIndex != null ? "scale-100" : ""}
         basicContent={content[movieSelectedIndex] || null}
@@ -202,7 +202,7 @@ export const SearchBar = ({ className, updateSearches, searchSelected }) => {
   }
 
   useEffect(() => {
-    if (searchSelected === -1) return
+    if (searchSelected === null) return
 
     setSearch(searchSelected.name)
     setParams(searchSelected.params)
