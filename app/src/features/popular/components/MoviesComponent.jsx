@@ -1,11 +1,10 @@
 import clsx from 'clsx'
-import { Navigate } from "react-router-dom"
-import { Button } from "@/components/Elements/Button/Button"
 import { MoviesList } from './MoviesList'
+// import { Button } from "@/components/Elements/Button/Button"
 
 import { useUpcomingMovies, usePopularMovies } from "../hooks/useMovies"
 
-const MoviesComponentLayout = ({ children, title, page, query, className }) => {
+const MoviesComponentLayout = ({ children, title, query, className }) => {
 
   return (
     <div className={clsx("flex h-full w-full lg:w-9/12 flex-col", className)}>
@@ -15,11 +14,11 @@ const MoviesComponentLayout = ({ children, title, page, query, className }) => {
           <p>No movies found!</p>
         </div>
       ) : (
-        <div className="mt-6 lg:mt-5 lg:pr-3 lg:overflow-y-scroll">
+        <div className="mt-6 lg:mt-5 lg:pr-3">
           {children}
         </div>
       )}
-      <Button className="mt-6 lg:mt-3 mx-auto lg:mx-2" onClick={() => Navigate(`/${page}`)}>See more</Button>
+      {/* <Button className="mt-6 lg:mt-3 mx-auto lg:mx-2">See more</Button> */}
     </div>
   )
 }
@@ -30,7 +29,6 @@ export const PopularMovies = ({ className }) => {
   return (
     <MoviesComponentLayout
       title="Popular Movies"
-      page="popular-movies"
       query={moviesQuery}
       className={className}
     >
@@ -45,7 +43,6 @@ export const UpcomingMovies = ({ className }) => {
   return (
     <MoviesComponentLayout
       title="Upcoming Movies"
-      page="upcoming-movies"
       query={moviesQuery}
       className={className}
     >
