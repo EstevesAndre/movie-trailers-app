@@ -8,10 +8,12 @@ import storage from '@/utils/storage'
 
 export const Landing = ({ title, current = "Search a movie" }) => {
   const [currentSearches, setCurrentSearches] = useState(storage.getSearches())
-  const [searchSelected, setSearchSelected] = useState(currentSearches[0])
+  const [searchSelected, setSearchSelected] = useState(currentSearches?.[0] || null)
   const [titleSearch, setTitleSearch] = useState(null)
 
   const updateSearches = (newSearch, requestParams) => {
+    if (newSearch === '') return
+
     const newSearchObject = {
       name: newSearch,
       params: requestParams
@@ -30,9 +32,8 @@ export const Landing = ({ title, current = "Search a movie" }) => {
   return (
     <MainLayout title={`${titleSearch ? titleSearch + ' - ' : ''} ${title}`}>
       <Sidebar searches={currentSearches} onItemSelected={onItemSelected} />
-      <div className="flex-grow max-w-7xl flex flex-col items-center lg:overflow-y-scroll lg:border-l-2 lg:border-r-2 lg:border-gray-800">
+      <div className="flex-grow max-w-7xl flex flex-col items-center lg:border-l lg:border-r lg:border-gray-800">
         <div className="flex-0 flex sm:flex-row flex-col items-center py-5 sm:py-10">
-          {/* <p className="text-4xl font-mono font-semibold text-gray-100 text-center sm:inline-block hidden sm:mr-5">{title}</p> */}
           <p className="text-4xl font-mono font-normal text-gray-200 text-center sm:inline-block mt-3 sm:mt-0">{current}</p>
         </div>
         <SearchBar className="flex-grow w-full" updateSearches={updateSearches} searchSelected={searchSelected} />
