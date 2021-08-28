@@ -1,35 +1,35 @@
-import { ChevronRightIcon, HomeIcon } from '@heroicons/react/outline'
+import { ChevronRightIcon } from '@heroicons/react/outline'
+import clsx from 'clsx'
 
-const Menu = [
-  { name: 'Home', href: '#', current: true, icon: <HomeIcon /> },
-  { name: 'Best Movies', href: '#', current: false, icon: <HomeIcon /> },
-  { name: 'Best Artists', href: '#', current: false, icon: <HomeIcon /> },
-  { name: 'Favorites', href: '#', current: false, icon: <HomeIcon /> },
-]
+const MenuGroup = ({ title = '', items = [], onItemSelected = () => { } }) => {
 
-const SearchesMock = [
-  { name: 'SpiderMan', href: '#' },
-  { name: 'SherlockHolmes', href: '#' },
-  { name: 'Infinity War', href: '#' },
-]
-
-const MenuGroup = ({ title = '', items = [] }) => {
   return (
     <div className="flex-1 pl-6 mt-12 pb-5">
-      <p className="pr-6 uppercase text-sm text-gray-400 font-semibold mb-2">{title}</p>
-      <ul>
+      <p className="pr-6 uppercase text-sm text-gray-400 font-semibold mb-10">{title}</p>
+      <div className="flex flex-col space-y-5">
         {items.map((item, index) => (
-          <a key={index} href={item.href} className="block space-x-3 space-y-5 pl-2 item hover:border-red-600 border-gray-900 border-r-2 ease-linear duration-200">
-            {item.icon ? item.icon : <ChevronRightIcon />}
-            <p className="inline-block text-sm font-medium text-gray-400">{item.name}</p>
-          </a>
+          <div
+            key={index}
+            className={clsx(
+              "flex justify-start items-center content-center",
+              "border-r-2 ease-linear duration-200",
+              "hover:border-red-600 border-gray-900",
+              "hover:text-red-500 text-gray-400",
+              "cursor-pointer duration-200"
+            )}
+            onClick={() => onItemSelected(index)}
+          >
+            <ChevronRightIcon className="w-6 h-6" />
+            <p className="text-sm font-medium pl-2 py-2 text-current hover:text-current">{item.name}</p>
+          </div>
         ))}
-      </ul>
+      </div>
     </div >
   )
 }
 
-export const Sidebar = () => {
+export const Sidebar = ({ searches, onItemSelected = () => { } }) => {
+
   return (
     <div className='flex-0 flex flex-no-wrap h-full' id="Sidebar">
       <div className='w-64 absolute lg:relative bg-gray-900 shadow lg:h-full flex-col justify-between hidden lg:flex'>
@@ -38,9 +38,8 @@ export const Sidebar = () => {
           <p className='sm:block hidden sm:ml-3 font-mono font-semibold'>Movie Trailers</p>
           <p className='sm:block hidden text-red-500 font-black'>.</p>
         </div>
-        <div className='flex-grow items'>
-          <MenuGroup title="Menu" items={Menu} />
-          <MenuGroup title="Searches" items={SearchesMock} />
+        <div className='flex-grow items mb-2 overflow-hidden'>
+          <MenuGroup title="Searches" items={searches} onItemSelected={onItemSelected} />
         </div>
       </div>
     </div >
