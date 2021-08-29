@@ -12,7 +12,7 @@ Website anb web API on which you can search for movie trailers
 
 * Screenshot **#1**
 
-![Home](https://github.com/EstevesAndre/dept-the-case/blob/master/screenshots/home-view.png?raw=true)
+![Home](https://github.com/EstevesAndre/dept-the-case/blob/master/screenshots/home-view.png)
 
 
 * Screenshot **#2**
