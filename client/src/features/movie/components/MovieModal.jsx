@@ -9,7 +9,20 @@ import { Actors } from "./Actors"
 import { Images } from "./Images"
 import { Similars } from "./Similars"
 
-const BaseModalComponent = ({ className, children, onClose, isLoading, backdrop = null }) => {
+const BaseModalComponent = ({ className, children, onClose = () => { }, isLoading, backdrop = null }) => {
+
+  // const handleKeyPress = useCallback(event => {
+  //   if (event.key === 'Escape')
+  //     onClose()
+  // }, [])
+
+  // useEffect(() => {
+  //   window.addEventListener('keydown', handleKeyPress)
+  //   return () => {
+  //     window.removeEventListener('keydown', handleKeyPress)
+  //   }
+  // }, [handleKeyPress])
+
   return (
     <div className={clsx(
       "z-10 fixed top-0 left-0 w-screen h-screen flex items-center justify-center bg-gray-800 bg-opacity-90 transform transition-transform duration-300",
@@ -17,10 +30,7 @@ const BaseModalComponent = ({ className, children, onClose, isLoading, backdrop 
       className
     )}
     >
-      <div
-        className={clsx("z-20 bg-gray-900 max-w-screen-2xl w-full sm:w-11/12 md:max-h-screen h-full sm:h-5/6 rounded-xl relative",
-          "overflow-y-scroll")}
-      >
+      <div className="z-20 bg-gray-900 max-w-screen-2xl w-full sm:w-11/12 md:max-h-screen h-full sm:h-5/6 rounded-xl relative overflow-y-scroll">
         <div className={clsx("absolute z-30 w-full h-full flex items-start overflow-hidden rounded-xl", isLoading ? "skeleton-animation opacity-20" : "opacity-10")}>
           {backdrop &&
             <img src={backdrop} className="h-full opacity-70 adjust-img-ratio" />
@@ -92,7 +102,6 @@ export const MovieModal = ({ className, basicContent, onClose }) => {
   const content = useMovieInformation(basicContent?.imdb_id || null)
 
   if (!basicContent) return (<BaseModalComponent className={className}></BaseModalComponent>)
-  console.log(content)
 
   return (
     <BaseModalComponent

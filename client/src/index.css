@@ -41,9 +41,8 @@ p, a, input, span {
   max-width: 24rem;
 }
 
-.min-h-main-layout {
-  min-height: 524px;
-  overflow-y: scroll;
+.min-h-80 {
+  min-height: 20rem;
 }
 
 .limit-18ch {
@@ -61,6 +60,10 @@ p, a, input, span {
 .adjust-img-ratio {
   object-fit: cover;
   width: 100%;
+}
+
+.bg-gray-950 {
+  background-color: rgb(13, 19, 31)
 }
 
 .ratio {
@@ -90,15 +93,14 @@ p, a, input, span {
   padding: 1rem 0rem;
   width: 100%;
   height: 50vh;
-  top: 50%
+  top: 40%;
 }
 
 @media (min-width: 840px) {
   .landscape {
     padding: 1rem 3rem;
     width: 100%;
-    height: 50vh;
-    
+    /* height: 50vh; */
   }
 }
 
