@@ -4,14 +4,17 @@
   "description": "API middleware using the Bulletproof node.js repo: https://github.com/santiq/bulletproof-nodejs",
   "main": "src/app.js",
   "scripts": {
-    "build": "tsc",
-    "heroku-postbuild": "npm run build",
-    "start": "nodemon app.js",
     "inspect": "nodemon --inspect src/app.js",
     "lint": "npm run lint:js ",
     "lint:eslint": "eslint --ignore-path .gitignore --ext .js",
     "lint:js": "npm run lint:eslint src/",
-    "lint:fix": "npm run lint:js -- --fix"
+    "lint:fix": "npm run lint:js -- --fix",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "server": "nodemon src/app.js",
+    "develop": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\"",
+    "start": "concurrently --kill-others-on-fail \"npm run server\" \"npm run start --prefix client\""
   },
   "keywords": [
     "jobs",
@@ -23,6 +26,7 @@
   "author": "Andre Esteves",
   "dependencies": {
     "axios": "^0.21.1",
+    "concurrently": "^6.2.1",
     "cors": "^2.8.5",
     "dotenv": "^10.0.0",
     "express": "^4.17.1",
