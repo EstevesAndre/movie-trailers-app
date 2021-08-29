@@ -32,7 +32,8 @@
     "express": "^4.17.1",
     "googleapis": "^84.0.0",
     "morgan": "^1.10.0",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "react-share": "^4.4.0"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
