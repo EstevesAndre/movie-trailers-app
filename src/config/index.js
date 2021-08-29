@@ -5,7 +5,7 @@ module.exports = {
   /**
    * Your favorite port
    */
-  port: parseInt(process.env.PORT, 10) || 5000,
+  port: parseInt(process.env.PORT, 10) || 8000,
 
   /**
    * Used by winston logger
