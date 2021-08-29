@@ -25,12 +25,12 @@ const SideBarMovieCard = ({ className, released, movie, setSelected = () => { } 
           {movie.title}
         </p>
         <p className="flex-grow text-gray-500 text-sm leading-tight mt-1">
-          {movie.gen.map((g, i) => i < 3 ? g.genre + (i != movie.gen.length - 1 ? ", " : "") : "")}
+          {movie.gen.map((g, i) => i < 3 ? g.genre + (i !== movie.gen.length - 1 ? ", " : "") : "")}
         </p>
         {released ? (
           <div>
             <img src="./imdb-logo-transparent.png" className="inline-block w-12 rounded-xl mr-2" />
-            <p className="inline-block font-semibold">{movie.rating == 0 ? "N.A" : movie.rating}</p>
+            <p className="inline-block font-semibold">{movie.rating === 0 ? "N.A" : movie.rating}</p>
           </div>
         ) : (
           <div>
