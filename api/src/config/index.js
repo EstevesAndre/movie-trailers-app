@@ -14,7 +14,7 @@ module.exports = {
   /**
    * Your favorite port
    */
-  port: parseInt(process.env.PORT, 10),
+  port: parseInt(process.env.PORT, 10) || 5000,
 
   /**
    * Used by winston logger
@@ -29,8 +29,8 @@ module.exports = {
   api: {
     prefix: '/api',
 
-    imdbApiKey: 'k_0ue6efwd',
+    imdbApiKey: process.env.IMDB_API_KEY,
 
-    youTubeDataApi_v3: 'AIzaSyDHl5gFs13Awhn-VHARjubZip0C81D3J20',
+    youTubeDataApi_v3: process.env.YOUTUBE_API_KEY
   }
 }
