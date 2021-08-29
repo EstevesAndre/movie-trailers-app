@@ -2,25 +2,25 @@
 
 ## **Movie Trailers - Dept Case**
 
-### Website anb web API on which you can search for movie trailers
+Website anb web API on which you can search for movie trailers
 
 ### **Website**
 
 **Development Library**: `React.js` and `TailwindCSS`
 
-**Structure**: Adapted from `Bulletproof-react` [Github-project](https://github.com/alan2207/bulletproof-react)
+**Structure**: Adapted from `Bulletproof-react` - [Github-project](https://github.com/alan2207/bulletproof-react)
 
-* Screenshot #1
+* Screenshot **#1**
 
 ![Home](https://github.com/EstevesAndre/dept-the-case/blob/master/screenshots/home-view.png?raw=true)
 
 
-* Screenshot #2
+* Screenshot **#2**
 
 ![Movie](https://github.com/EstevesAndre/dept-the-case/blob/master/screenshots/movie-view.png?raw=true)
 
 
-* Screenshot #3
+* Screenshot **#3**
 
 ![Trailer](https://github.com/EstevesAndre/dept-the-case/blob/master/screenshots/trailer-view.png?raw=true)
 
