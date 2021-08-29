@@ -15,7 +15,6 @@ export const TopRatedMovies = ({ styles }) => {
         <p className="text-xl font-thin text-center pb-10">{`Failed to fetch data! :(`}</p>
       </div>
     )
-
   return (
     <div className={styles}>
       <p className="text-3xl font-semibold text-center pb-10">Top Rated Movies</p>
@@ -28,7 +27,7 @@ export const TopRatedMovies = ({ styles }) => {
               </div>
             ))
           ) : (
-            moviesQuery?.data?.movies.map((movie, index) => (
+            moviesQuery?.data?.movies?.map((movie, index) => (
               <div key={index}>
                 <Card content={movie} size="sm" setSelected={() => setMovieSelectedIndex(index)} />
               </div>
