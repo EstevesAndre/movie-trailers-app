@@ -41,9 +41,8 @@ p, a, input, span {
   max-width: 24rem;
 }
 
-.min-h-main-layout {
-  min-height: 524px;
-  overflow-y: scroll;
+.min-h-80 {
+  min-height: 20rem;
 }
 
 .limit-18ch {
@@ -61,6 +60,10 @@ p, a, input, span {
 .adjust-img-ratio {
   object-fit: cover;
   width: 100%;
+}
+
+.bg-gray-950 {
+  background-color: rgb(13, 19, 31)
 }
 
 .ratio {

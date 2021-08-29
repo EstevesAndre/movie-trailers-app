@@ -4,7 +4,7 @@ import * as React from 'react'
 import { Spinner } from '@/components/Elements/Spinner'
 
 const variants = {
-  primary: 'bg-gray-700 text-gray-200 hover:bg-gray-600 hover:text-gray-100',
+  primary: 'bg-transparent text-gray-200 hover:bg-gray-700 hover:text-red-500',
   inverse: 'bg-white text-blue-600 hover:bg-blue-600:text-white',
   danger: 'bg-red-600 text-white hover:bg-red-50:text-red-600',
 }
