@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import { ErrorBoundary } from 'react-error-boundary'
 import { QueryClientProvider } from 'react-query'
-import { ReactQueryDevtools } from 'react-query/devtools'
+// import { ReactQueryDevtools } from 'react-query/devtools'
 import { BrowserRouter as Router } from 'react-router-dom'
 
 import { Button, Spinner } from '@/components/Elements'
@@ -33,7 +33,7 @@ export const AppProvider = ({ children }) => {
     >
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <QueryClientProvider client={queryClient}>
-          {process.env.NODE_ENV !== 'test' && <ReactQueryDevtools />}
+          {/* {process.env.NODE_ENV !== 'test' && <ReactQueryDevtools />} */}
           <Router>{children}</Router>
         </QueryClientProvider>
       </ErrorBoundary>
