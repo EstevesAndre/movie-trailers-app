@@ -39,7 +39,7 @@ export const Sidebar = ({ searches, onItemSelected = () => { } }) => {
           <p className='sm:block hidden text-red-500 font-black'>.</p>
         </div>
         <div className='flex-grow items mb-2 overflow-hidden'>
-          <MenuGroup title="Searches" items={searches} onItemSelected={onItemSelected} />
+          <MenuGroup title="Recent Searches" items={searches} onItemSelected={onItemSelected} />
         </div>
       </div>
     </div>
