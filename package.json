@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "API middleware using the Bulletproof node.js repo: https://github.com/santiq/bulletproof-nodejs",
   "main": "src/app.js",
+  "engines": {
+    "node": "14.15.1",
+    "npm": "7.6.3"
+  },
   "scripts": {
     "inspect": "nodemon --inspect src/app.js",
     "lint": "npm run lint:js ",
@@ -32,14 +36,13 @@
     "express": "^4.17.1",
     "googleapis": "^84.0.0",
     "morgan": "^1.10.0",
-    "path": "^0.12.7",
-    "react-share": "^4.4.0"
+    "nodemon": "^2.0.12",
+    "path": "^0.12.7"
   },
   "devDependencies": {
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-prettier": "^3.4.1",
-    "nodemon": "^2.0.12",
     "prettier": "^2.3.2"
   }
 }

@@ -35,6 +35,7 @@ const ImageComponent = ({ img_low_res, img_high_res, isHover }) => {
         className={className}
         onError={onError}
         style={{ display: isLoading ? "block" : "none" }}
+        alt={`img_low_res_${img_low_res}`}
       />
       <img
         src={img_high_res}
@@ -43,6 +44,7 @@ const ImageComponent = ({ img_low_res, img_high_res, isHover }) => {
         onLoadStart={() => setIsLoading(true)}
         onLoad={() => setIsLoading(false)}
         style={{ display: isLoading ? "none" : "block" }}
+        alt={`img_high_res_${img_high_res}`}
       />
     </>
   )
@@ -88,7 +90,7 @@ export const Card = ({ size = "md", content, mock = false, setSelected = () => {
           <p className="text-bold align-bottom text-gray-400 rounded-b-xl inline-block overflow-hidden">{`(${content.year})`}</p>
         </div>
         <div className="absolute top-1 right-1 bg-gray-900 px-1 pt-1.5 opacity-90 rounded-xl flex flex-col items-center">
-          <img src="./imdb-logo-transparent.png" className="w-12 rounded-xl" />
+          <img src="./imdb-logo-transparent.png" className="w-12 rounded-xl" alt="imdb-logo" />
           <p className="font-semibold">{content.rating == 0 ? "N.A" : content.rating}</p>
         </div>
       </div>

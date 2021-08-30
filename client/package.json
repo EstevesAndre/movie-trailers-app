@@ -2,7 +2,6 @@
   "name": "app",
   "version": "0.1.0",
   "private": true,
-  "proxy": "http://localhost:5000",
   "dependencies": {
     "@craco/craco": "^6.2.0",
     "@headlessui/react": "^1.4.0",
@@ -21,7 +20,9 @@
     "react-query": "^3.21.0",
     "react-router-dom": "^6.0.0-beta.0",
     "react-scripts": "4.0.3",
+    "react-share": "^4.4.0",
     "react-spinners": "^0.11.0",
+    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7",
     "web-vitals": "^1.1.2",
     "zustand": "^3.5.9"
   },
@@ -29,8 +30,7 @@
     "start": "craco start",
     "build": "craco build",
     "test": "craco test",
-    "eject": "react-scripts eject",
-    "prepare": "cd .. && husky install app/.husky"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -56,9 +56,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest-dom": "^3.9.0",
     "eslint-plugin-prettier": "^3.4.1",
-    "husky": "^7.0.1",
     "postcss": "^7.0.36",
-    "prettier": "^2.3.2",
-    "tailwindcss": "npm:@tailwindcss/postcss7-compat@^2.2.7"
+    "prettier": "^2.3.2"
   }
 }

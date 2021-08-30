@@ -34,12 +34,12 @@ export const Sidebar = ({ searches, onItemSelected = () => { } }) => {
     <div className='flex-0 flex flex-no-wrap h-full'>
       <div className='w-64 absolute lg:relative bg-gray-900 shadow flex-col justify-between hidden lg:flex'>
         <div className='flex-none h-24 w-full pt-5 flex justify-center items-center'>
-          <img src="./logo.png" className="h-full" />
+          <img src="./logo.png" className="h-full" alt="logo" />
           <p className='sm:block hidden sm:ml-3 font-mono font-semibold'>Movie Trailers</p>
           <p className='sm:block hidden text-red-500 font-black'>.</p>
         </div>
         <div className='flex-grow items mb-2 overflow-hidden'>
-          <MenuGroup title="Searches" items={searches} onItemSelected={onItemSelected} />
+          <MenuGroup title="Recent Searches" items={searches} onItemSelected={onItemSelected} />
         </div>
       </div>
     </div>

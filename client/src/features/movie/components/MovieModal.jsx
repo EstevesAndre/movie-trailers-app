@@ -78,17 +78,17 @@ const Tab = ({ name, children }) => {
 const Tabs = ({ content }) => {
   return (
     <div className="mx-auto max-w-screen-lg w-full">
-      {content?.actorList && content?.actorList.length != 0 &&
+      {content?.actorList && content?.actorList.length !== 0 &&
         <Tab name="Actors">
           <Actors actors={content?.actorList} />
         </Tab>
       }
-      {content?.images && content?.images.length != 0 &&
+      {content?.images && content?.images.length !== 0 &&
         <Tab name="Images">
           <Images images={content?.images} />
         </Tab>
       }
-      {content?.similars && content?.similars.length != 0 &&
+      {content?.similars && content?.similars.length !== 0 &&
         <Tab name="Related">
           <Similars movies={content?.similars} />
         </Tab>
