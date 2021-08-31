@@ -1,13 +1,17 @@
 const route = require('express').Router()
 const axios = require('axios').default
+const rapidApiHost = require('../../config/index.js').api.imdbRapidApiHost
+const rapidApiKey = require('../../config/index.js').api.imdbRapidApiKey
 
+console.log(rapidApiHost)
+console.log(rapidApiKey)
 const getDefaultDataImdbOptions = (url) => {
   return {
     method: 'GET',
     url,
     headers: {
-      'x-rapidapi-host': 'data-imdb1.p.rapidapi.com',
-      'x-rapidapi-key': 'dc6f2d8942mshff880fc80e812acp13a7b6jsn2f82bdb98723'
+      'x-rapidapi-host': rapidApiHost,
+      'x-rapidapi-key': rapidApiKey
     }
   }
 }
