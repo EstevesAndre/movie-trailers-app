@@ -64,7 +64,7 @@ export const Trailers = ({ title }) => {
               </div>
             </div>
           )) : (
-            trailersData?.data?.urls.slice(0, 4).map((video, index) => (
+            trailersData?.data?.urls?.slice(0, 4).map((video, index) => (
               <div
                 key={index}
                 className="w-full sm:w-60 rounded-xl relative cursor-pointer"

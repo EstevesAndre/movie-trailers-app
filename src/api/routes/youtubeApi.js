@@ -25,13 +25,13 @@ module.exports = (app) => {
       }).then((response) => {
         const data = response.data
 
-        const filteredData = data.items.map(item => {
+        const filteredData = data?.items?.map(item => {
           return {
             videoId: item.id.videoId,
             thumbnail: item.snippet.thumbnails.high.url,
             title: item.snippet.title
           }
-        })
+        }) || []
 
         return res.json({ urls: filteredData }).status(200)
       }).catch(err => {
