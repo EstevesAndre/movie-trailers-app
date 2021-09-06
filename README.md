@@ -2,6 +2,8 @@
 
 Website anb web API on which you can search for movie trailers
 
+* Deploy: https://secure-earth-47342.herokuapp.com
+
 ### **Website**
 
 **Development Library**: `React.js` and `TailwindCSS`

@@ -1,14 +1,16 @@
 const route = require('express').Router()
 const axios = require('axios').default
 const apiKey = require('../../config/index.js').api.imdbApiKey
+const rapidApiHost = require('../../config/index.js').api.imdbApiRapidApiHost
+const rapidApiKey = require('../../config/index.js').api.imdbApiRapidApiKey
 
 const getRequestImdbApiOptions = (imdb_id) => {
   return {
     method: 'GET',
     url: `https://imdb-api.com/en/API/Title/${apiKey}/${imdb_id}/FullActor,Posters,Images,Trailer,Ratings,`,
     headers: {
-      'x-rapidapi-host': 'imdb-api1.p.rapidapi.com',
-      'x-rapidapi-key': 'dc6f2d8942mshff880fc80e812acp13a7b6jsn2f82bdb98723'
+      'x-rapidapi-host': rapidApiHost,
+      'x-rapidapi-key': rapidApiKey
     }
   }
 }

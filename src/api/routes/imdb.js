@@ -3,8 +3,6 @@ const axios = require('axios').default
 const rapidApiHost = require('../../config/index.js').api.imdbRapidApiHost
 const rapidApiKey = require('../../config/index.js').api.imdbRapidApiKey
 
-console.log(rapidApiHost)
-console.log(rapidApiKey)
 const getDefaultDataImdbOptions = (url) => {
   return {
     method: 'GET',

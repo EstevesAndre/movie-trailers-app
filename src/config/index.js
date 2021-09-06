@@ -26,6 +26,10 @@ module.exports = {
 
     imdbRapidApiKey: process.env.IMDB_RAPID_API_KEY,
 
+    imdbApiRapidApiHost: process.env.IMDB_API_RAPID_API_HOST,
+
+    imdbApiRapidApiKey: process.env.IMDB_API_RAPID_API_KEY,
+
     imdbApiKey: process.env.IMDB_API_KEY,
 
     youTubeDataApi_v3: process.env.YOUTUBE_API_KEY
