@@ -1,6 +1,4 @@
-# DEPT THE CASE
-
-## **Movie Trailers - Dept Case**
+# **Movie Trailers**
 
 Website anb web API on which you can search for movie trailers
 
@@ -12,17 +10,17 @@ Website anb web API on which you can search for movie trailers
 
 * Screenshot **#1**
 
-![Home](https://github.com/EstevesAndre/dept-the-case/blob/master/screenshots/home-view.png?raw=true)
+![Home](https://github.com/EstevesAndre/movie-trailers-app/blob/master/screenshots/home-view.png?raw=true)
 
 
 * Screenshot **#2**
 
-![Movie](https://github.com/EstevesAndre/dept-the-case/blob/master/screenshots/movie-view.png?raw=true)
+![Movie](https://github.com/EstevesAndre/movie-trailers-app/blob/master/screenshots/movie-view.png?raw=true)
 
 
 * Screenshot **#3**
 
-![Trailer](https://github.com/EstevesAndre/dept-the-case/blob/master/screenshots/trailer-view.png?raw=true)
+![Trailer](https://github.com/EstevesAndre/movie-trailers-app/blob/master/screenshots/trailer-view.png?raw=true)
 
 
 ### **WebAPI**

@@ -1,4 +1,4 @@
-const storagePrefix = 'dept_the_case_'
+const storagePrefix = 'movie_trailers_'
 
 const storage = {
   getSearches: () => {
