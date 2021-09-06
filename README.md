@@ -1,6 +1,6 @@
 # **Movie Trailers**
 
-Website anb web API on which you can search for movie trailers
+Website and web API on which you can search for movie trailers
 
 * Deploy: https://movie-trailers-45732.herokuapp.com
 
